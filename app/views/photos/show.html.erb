@@ -2,6 +2,14 @@
   <h1>Photo #<%= @photo.id %></h1>
 </div>
 
+<p>
+  <img src="<%= @photo.image_url %>" width=300>
+</p>
+
+<p>
+  <a href="/create_favorite?photo_id=<%= @photo.id %>&user_id=24">Favorite</a>
+</p>
+
 <dl class="dl-horizontal">
   <dt>Image url</dt>
   <dd><%= @photo.image_url %></dd>
@@ -11,5 +19,56 @@
 
   <dt>User</dt>
   <dd><%= @photo.user_id %></dd>
+</dl>
+
+<h2>Comments:</h2>
+
+<dl class="dl-horizontal">
+
+
+  <% @photo.comments.each do |comment| %>
+    <dt><%= comment.user_id %></dt>
+    <dd><%= comment.content %></dd>
+  <% end %>
 
 </dl>
+
+
+
+<form action="/create_comment" class="form-horizontal">
+  <!-- Label and input for content -->
+  <div class="form-group">
+    <label for="content" class="col-sm-2 control-label">
+      Comment
+    </label>
+    <div class="col-sm-10">
+      <textarea id="content" name="content" placeholder="Content" class="form-control" rows="3"></textarea>
+    </div>
+  </div>
+
+  <!-- Label and input for photo_id -->
+  <div class="form-group">
+<!--     <label for="photo_id" class="col-sm-2 control-label">
+      Photo
+    </label> -->
+    <div class="col-sm-10">
+      <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= @photo.id %>">
+    </div>
+  </div>
+
+  <!-- Label and input for user_id -->
+  <div class="form-group">
+    <label for="user_id" class="col-sm-2 control-label">
+      User
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @photo.user_id %>">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <input type="submit" value="Create Comment" class="btn btn-primary">
+    </div>
+  </div>
+</form>
