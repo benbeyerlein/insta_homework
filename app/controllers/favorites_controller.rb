@@ -47,4 +47,17 @@ class FavoritesController < ApplicationController
 
     redirect_to "/favorites", :notice => "Favorite deleted."
   end
+
+  def my_favorites
+    #favs = Favorite.where(:user_id => 1)
+    # @favphotos = Photo.all :joins => :favorites, :conditions => {'favorites.user_id' => current_user.id}
+    #            Client.all :joins => :orders, :conditions => {:orders => {:created_at => time_range}}
+    @user = User.find(current_user.id)
+
+
+    #@favphotos = Photo.all(:joins => 'INNER JOIN favorites ON favorites.photo_id = photos.id AND favorites.user_id = 1')
+
+    #http://apidock.com/rails/ActiveRecord/Querying/find_by_sql
+  end
+
 end

@@ -50,7 +50,7 @@ class PhotosController < ApplicationController
     redirect_to "/photos", :notice => "Photo deleted."
   end
 
-  def wall
+  def my_wall
     @photo = Photo.where(:user_id => current_user.id)
   end
 
