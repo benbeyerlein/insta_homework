@@ -6,9 +6,17 @@
   <img src="<%= @photo.image_url %>" width=300>
 </p>
 
-<p>
-  <a href="/create_favorite?photo_id=<%= @photo.id %>&user_id=24">Favorite</a>
-</p>
+<% fav = Favorite.where(:user_id=>current_user.id).where(:photo_id=>@photo.id).first %>
+
+<% if fav.nil? %>
+  <p>
+    <a href="/create_favorite?photo_id=<%= @photo.id %>&user_id=<%=current_user.id %>">Favorite</a>
+  </p>
+<% else %>
+  <p>
+    <a href="/delete_favorite/<%= fav.id %>">Unfavorite</a>
+  </p>
+<% end %>
 
 <dl class="dl-horizontal">
   <dt>Image url</dt>

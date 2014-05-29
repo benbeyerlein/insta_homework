@@ -45,7 +45,8 @@ class FavoritesController < ApplicationController
 
     @favorite.destroy
 
-    redirect_to "/favorites", :notice => "Favorite deleted."
+    # redirect_to "/favorites", :notice => "Favorite deleted."
+    redirect_to "/photos/#{@favorite.photo_id}", :notice => "Favorite deleted."
   end
 
   def my_favorites
